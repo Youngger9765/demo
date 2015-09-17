@@ -5,7 +5,8 @@ class EventsController < ApplicationController
   #get events/index
   #get events
   def index
-    @events = Event.all
+    @events = Event.page(params[:page]).per(5)
+    
   end
 
   #Get events/
@@ -43,7 +44,7 @@ class EventsController < ApplicationController
   def update 
 
     if @event.update(event_params)
-      
+
       redirect_to event_url(@event)
       flash[:notice] = "event was successfully updated"
     else
@@ -52,7 +53,9 @@ class EventsController < ApplicationController
   end
 
   def destroy
+    @event.destroy
     flash[:alert] = "event was successfully deleted"
+    redirect_to events_url
   end
 
 
