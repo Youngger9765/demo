@@ -7,8 +7,10 @@
 		<%= e.name %>
 		</td>
 		<td>
-		<%= link_to " (XML)", event_path(e, :format => :xml), :class => "btn btn-primary" %>
-    	<%= link_to " (JSON)", event_path(e, :format => :json), :class => "btn btn-primary" %>
+		<%= link_to " Attendees", event_attendees_path(e),  :class => "btn btn-primary"  %>
+
+		<%= link_to " (XML)", event_path(e, :format => :xml), :class => "btn btn-default" %>
+    	<%= link_to " (JSON)", event_path(e, :format => :json), :class => "btn btn-default" %>
 
 		<%= link_to "Show", event_path(e), :class => "btn btn-primary" %>
 		

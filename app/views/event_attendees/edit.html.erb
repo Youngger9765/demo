@@ -1,0 +1,14 @@
+<h2>Edit Page</h2>
+
+<%= form_for @attendee, :url => event_attendee_path(@event, @attendee), :method => :patch do |f| %>
+
+	<div class="form-group">
+		<li>Attendee	<%= f.label :name %> </li>
+		<%= f.text_field :name, :class => "form-control"%>
+	</div>
+
+	<div class="form-group">
+		<%= f.submit :class => "btn btn-primary" %>
+	</div>
+
+<% end %>
