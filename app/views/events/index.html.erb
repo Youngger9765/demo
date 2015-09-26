@@ -1,21 +1,26 @@
 <h1>Holo~</h1>
 
-<ul>
-
+<table class="table">
 <% @events.each do |e| %>
-	<li>
+	<tr>
+		<td>
 		<%= e.name %>
+		</td>
+		<td>
+		<%= link_to " (XML)", event_path(e, :format => :xml), :class => "btn btn-primary" %>
+    	<%= link_to " (JSON)", event_path(e, :format => :json), :class => "btn btn-primary" %>
 
-		<%= link_to "Show", event_path(e) %>
+		<%= link_to "Show", event_path(e), :class => "btn btn-primary" %>
 		
-		<%= link_to "Edit", edit_event_path(e) %>
+		<%= link_to "Edit", edit_event_path(e), :class => "btn btn-default" %>
 		
-		<%= link_to 'Delete', event_path(e), :method => :delete %>
-	</li>
+		<%= link_to 'Delete', event_path(e), :method => :delete, :class => "btn btn-danger" %>
+		</td>
+	</tr>
 
 <% end %>
 
-</ul>
+</table>
 
 
 

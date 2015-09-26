@@ -8,10 +8,28 @@
 </head>
 <body>
 
-<p style="color: green"><%= flash[:notice] %></p>
-<p style="color: red"><%= flash[:alert] %></p>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
 
-<%= yield %> <%# yield就是會被替換成樣板的地方 %>  
+			<% if flash[:notice].present? %>
+				<div class="alert alert-success	"role="alert">
+					<%= flash[:notice] %>
+				</div> 
+			<%end%>
+			
+			<% if flash[:alert].present? %>
+				<div class="alert alert-danger"role="alert">
+					<%= flash[:alert] %>
+				</div>
+				<%end%>
+			<%= yield %> <%# yield就是會被替換成樣板的地方 %>  
+		</div>
+	</div>
+
+</div>
+
+
 
 
 </body>

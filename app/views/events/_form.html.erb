@@ -1,9 +1,3 @@
-<%= f.label :name, "Name" %>
-<%= f.text_field :name %>
-
-<%= f.label :description, "Description" %>
-<%= f.text_area :description %>
-
 <% if @event.errors.any? %>
       <ul>
       <% @event.errors.full_messages.each do |msg| %>
@@ -11,6 +5,18 @@
       <% end %>
       </ul>
 <% end %>
+
+
+<div class="form-group">
+	<%= f.label :name, "Name" %>
+	<%= f.text_field :name, :class => "form-control"%>
+</div>
+
+<div class="form-group">
+	<%= f.label :description, "Description" %>
+	<%= f.text_area :description, :class => "form-control" %>
+</div>
+
 
 
 
