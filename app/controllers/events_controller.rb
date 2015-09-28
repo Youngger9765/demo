@@ -5,7 +5,7 @@ class EventsController < ApplicationController
   #get events/index
   #get events
   def index
-    @events = Event.page(params[:page]).per(5)
+    @events = Event.order("id DESC").page(params[:page]).per(5)
     
     respond_to do |format|
       format.html # index.html.erb
@@ -84,7 +84,7 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:name, :description)
+    params.require(:event).permit(:name, :description, :category_id)
     
   end
 

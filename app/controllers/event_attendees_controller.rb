@@ -3,10 +3,13 @@ class EventAttendeesController < ApplicationController
   before_action :set_event
   def index
   	@attendees = @event.attendees
+  
+
   end
 
   def show
   	@attendee = @event.attendees.find( params[:id] )
+
   	
   end
 

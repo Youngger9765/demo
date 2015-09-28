@@ -10,6 +10,8 @@
 
 		<%= link_to "Show", event_attendee_path(@event, a), :class => "btn btn-primary"%>
 
+		<% puts event_attendee_path(@event, a)%>
+
 		<%= link_to "Edit", edit_event_attendee_path(@event, a), :class => "btn btn-default"%>
 
 		<%= link_to "Delete", event_attendee_path(@event, a), :method =>"delete", :data => { :confirm => "Sure?"}, :class => "btn btn-danger"%>
