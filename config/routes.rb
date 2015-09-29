@@ -3,8 +3,15 @@ Rails.application.routes.draw do
   resources :events do
     resources :attendees, :controller => "event_attendees"
 	
-    colection do
+    collection do
       get :latest
+
+      #post :bulk_delete
+      post :bulk_update
+    end
+
+    member do
+      get :dashboard
     end
 
   end

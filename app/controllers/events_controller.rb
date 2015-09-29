@@ -5,8 +5,9 @@ class EventsController < ApplicationController
   #get events/index
   #get events
   def index
-    @events = Event.order("id DESC").page(params[:page]).per(5)
     
+    prepare_variable_for_index_template
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml { render :xml => @events.to_xml }
@@ -34,6 +35,13 @@ class EventsController < ApplicationController
       render :action => :new
     end
   end
+
+  #GET /events/latest
+  def latest
+    @events = Event.order("id DESC").limit(3)
+  end
+
+
 
   #Get events/show
   def show
@@ -72,8 +80,35 @@ class EventsController < ApplicationController
     redirect_to events_url
   end
 
+  #def bulk_delete
+  #  Event.destroy_all
+
+  #  redirect_to :back
+  #end
+
+  def bulk_update
+
+    ids = Array( params[:ids] )
+    #避免無勾選狀態
+
+    events = ids.map{|i| Event.find_by_id(i)}.compact
+    #compact 去除nill
 
 
+    if params[:commit] =="Delete"
+      events.each { |e| e.destroy}
+    elsif params[:commit] =="Publish"
+      events.each { |e| e.update( :status => "published")}
+    end
+
+    redirect_to :back
+    
+  end
+
+  def dashboard
+    #before action 會先去找 event_id
+    
+  end
 
 
 
@@ -84,8 +119,25 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:name, :description, 
+    params.require(:event).permit(:name, :description, :status,
                               :category_id, :group_ids =>[])
+    
+  end
+
+  def prepare_variable_for_index_template
+
+    if params[:keyword]  #如果 :keyword 有值的話
+      @events = Event.where(["name like ?", "%#{params[:keyword]}%"])
+    else
+      @events =Event.all
+    end
+
+    if params[:order]
+      sort_by = (params[:order] == 'name') ? 'name' : 'created_at'
+      @events = Event.order(sort_by).page(params[:page]).per(5)
+    end  
+
+    @events = @events.order("id DESC").page(params[:page]).per(5)
     
   end
 
