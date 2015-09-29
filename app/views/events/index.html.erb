@@ -21,6 +21,12 @@
 		<%= check_box_tag "ids[]", e.id, false%>
 		<%= e.name %>
 		</td>
+
+		<td>
+			<%= e.user.try(:nickname)%>
+		</td>
+
+
 		<td>
 		<%= link_to " Attendees", event_attendees_path(e),  :class => "btn btn-primary"  %>
 
