@@ -1,5 +1,12 @@
 <%= @event.name %>
 
+<ul>
+<% @event.groups.each do |g| %>
+	<li><%= g.name %></li>
+<%end%>
+</ul>
+
+
 <p>category_name: <%= @event.category_name %></p>
 
 <%= simple_format @event.description %>
