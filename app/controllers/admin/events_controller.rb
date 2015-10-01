@@ -1,23 +1,27 @@
 class Admin::EventsController < ApplicationController
 
-	before_action :authenticate
+	#後台登入
+	before_action :authenticate_user! 
+
+	#檢查權限
+	before_action :check_admin
 
 	layout "admin"
 
 
 	def index
-
 		@events =Event.all
-
 	end
 
 
 	protected
 
-	def authenticate
-		authenticate_or_request_with_http_basic do |user_name, password|
-      		user_name == "username" && password == "password"
-      	end
+	def check_admin
+		unless current_user.admin?
+			#flash[:alert] ="No Permission!"
+			raise ActiveRecord::RecordNotFound
+		end
+		
 	end
 
 

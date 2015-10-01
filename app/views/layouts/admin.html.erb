@@ -25,7 +25,9 @@
 				<%end%>
 			<%= yield %> <%# yield就是會被替換成樣板的地方 %>  
 			
-			<%= link_to "ADMIN", admin_events_path %>
+			<% if current_user && current_user.admin? %>
+				<%= link_to "ADMIN", admin_events_path %>
+			<%end%>
 
 		</div>
 	</div>
