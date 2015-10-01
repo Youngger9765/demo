@@ -9,7 +9,7 @@ class EventsController < ApplicationController
   def index
     
     prepare_variable_for_index_template
-
+Rails.logger.debug(@events.inspect)
     respond_to do |format|
       format.html # index.html.erb
       format.xml { render :xml => @events.to_xml }
